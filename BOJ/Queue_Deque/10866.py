@@ -37,7 +37,5 @@ def solution():
                 print(-1)
 
 
-
-
 if '__main__' == __name__:
     solution()
