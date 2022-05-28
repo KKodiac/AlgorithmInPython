@@ -2,32 +2,38 @@
 from collections import deque
 import sys
 def solution():
-    T = int(sys.stdin.readline())
+    t = int(sys.stdin.readline().rstrip())
 
-    for _ in range(T):
-        func_p = str(sys.stdin.readline())
-        n = int(sys.stdin.readline())
-        a = deque(eval(sys.stdin.readline()))
-
-        if n < func_p.count('D'):
+    for _ in range(t):
+        p = str(sys.stdin.readline().rstrip())
+        n = int(sys.stdin.readline().rstrip())
+        x = deque(sys.stdin.readline()[1:-2].rstrip().split(','))
+        if n == 0:
+            x = []
+        is_valid = True
+        R = 0
+        for i in p:
+            if i == 'R':
+                R += 1
+            if i == 'D':
+                if x:
+                    if R % 2:
+                        x.pop()
+                    else:
+                        x.popleft()
+                else:
+                    is_valid = False
+                    break
+        if not is_valid:
             print('error')
             continue
         
-        r_cnt = 0
-        for p in func_p:
-            if p == 'R':
-                r_cnt += 1
+        if R % 2:
+            x = reversed(x)
 
-            elif p == 'D':
-                if r_cnt % 2 == 1:
-                    a.pop()
-                else:
-                    a.popleft()
-        
-        if r_cnt % 2 == 1:
-            a.reverse()
+        print("["+",".join(i for i in x)+"]")
 
-        print(list(a))
+                
 
 if '__main__' == __name__:
     solution()
