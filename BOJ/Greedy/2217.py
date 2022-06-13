@@ -1,4 +1,4 @@
-# BOJ 2217 로프
+# BOJ 2217 로프(그리디)
 def solution():
     n = int(input())
     ropes = []
